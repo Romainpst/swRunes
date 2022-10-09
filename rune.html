@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+<div id="container">
+    <h1 id="quadroll"></h1>
+    <h1 id="nbEssai"></h1>
+    <h1 id="pourcentage"></h1>
+    <h1 id="nbPossibilities"></h1>
+</div>
+
+<script>
+
+var nbPossibilities = document.getElementById('nbPossibilities');
+var nbEssai = document.getElementById('nbEssai');
+var pourcentage = document.getElementById('pourcentage');
+var quadroll = document.getElementById('quadroll');
+var cpt = 0
+var cpt2 = 0
+var nbQuadroll = 0
+var arrayPossibilities = []
+
+
+function calcul() {
+    
+    var vitesse = 0
+    var attaque = 0
+    var tcc = 0
+    var dcc = 0
+    for (let i = 0; i < 4; i++) {
+        var random = Math.floor(Math.random() * 4)
+        if(random == 0) vitesse += 1
+        if(random == 1) attaque += 1
+        if(random == 2) tcc += 1
+        if(random == 3) dcc += 1
+    }
+
+    if(vitesse == 4 || attaque == 4 || tcc == 4 || dcc == 4){
+        cpt++
+    }
+
+    if(!arrayPossibilities.includes(vitesse + '' + attaque + '' + tcc + '' + dcc)){
+        arrayPossibilities.push(vitesse + '' + attaque + '' + tcc + '' + dcc)
+        console.log(vitesse + '' + attaque + '' + tcc + '' + dcc)
+    }
+
+    
+
+
+    quadroll.textContent = 'Nombre de quadroll : ' + cpt
+    nbEssai.textContent = "Nombre d'essais : " + cpt2
+
+
+    cpt2++;
+    nbPossibilities.textContent = 'Nombre de possibilitées' + arrayPossibilities.length
+    var pourc = ((cpt / cpt2) * 100).toFixed(2)
+    pourcentage.textContent = pourc + ' %'
+    
+}
+
+calcul()
+
+setInterval(calcul, 0.05);
+
+
+</script>
